@@ -21,7 +21,7 @@
 ```
 Инициализировать так: 
 ```
-docker cp ./src/main/resouces/init.sql postgres-docker:/docker-entrypoint-initdb.d/init.sql
+docker cp ./src/main/resources/init.sql postgres-docker:/docker-entrypoint-initdb.d/init.sql
 docker exec -u postgres postgres-docker psql postgres postgres -f docker-entrypoint-initdb.d/init.sql
 ```
   
