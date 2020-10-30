@@ -6,17 +6,25 @@
 ## Клонирование исходного кода в Git
 
 * cd \<project dir\>
-* git init
-* git add .
-* git commit -m "\<commit note\>"
-* git remote add origin \<link to git\>
-* git push -u origin master
+* git clone https://github.com/zipa455/simpleapi .
 
 ## Сборка приложения в Maven
 
 Для сборки в терминале выполнить команду:
 
-* mvnw clean install
+* ```mvn clean install``` или ```mvnw clean install```, если у вас Windows
+
+Перед этим у вас должна быть запущена и инициализирована база данных
+Запустить базу данных можно так:
+ ```
+ docker run --name postgres-docker -e POSTGRES_PASSWORD=root -p 5432:5432 postgres
+```
+Инициализировать так: 
+```
+docker cp ./src/main/resouces/init.sql postgres-docker:/docker-entrypoint-initdb.d/init.sql
+docker exec -u postgres postgres-docker psql postgres postgres -f docker-entrypoint-initdb.d/init.sql
+```
+  
 
 
 
