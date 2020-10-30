@@ -43,6 +43,7 @@ public class SubjectConverter {
         sbj.setId( subject.getId() );
         sbj.setName( subject.getName() );
         sbj.setType( subject.getType() );
+        sbj.setPopulating( subject.getPopulating() );
         ArrayList<String> names = new ArrayList<String>();
         Subject parent = subject.getParent();
         while (parent!=null) {

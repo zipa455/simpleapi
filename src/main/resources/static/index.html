@@ -11,6 +11,13 @@
 <body>
 <h1>City</h1>
 
+<div id="card" class="card" >
+    <div class="h3"  id="card-name">
+    </div>
+    <div id="card-pop"></div>
+    <div id="card-parent"></div>
+</div>
+
 <div>
     <table id="table_id"  class="table ">
         <thead class="thead thead-light">
@@ -22,6 +29,35 @@
     </table>
 </div>
 <script>
+    function getSubById( id ) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var oData = JSON.parse(this.responseText);
+                var oTBodyName = document.getElementById('card-name');
+                document.getElementById('card-parent').innerHTML="";
+                oTBodyName.innerHTML = oData['name'];
+                document.getElementById('card-pop').innerHTML= oData['populating'];
+                var ul = document.createElement('ul');
+                oData['parentNames'].forEach( function (oItem) {
+                    var li = document.createElement('li');
+                    li.setAttribute('class','item');
+                    li.innerHTML = oItem;
+                    ul.appendChild(li);
+                })
+                document.getElementById('card-parent').appendChild(ul) ;
+            }
+        };
+        xhttp.open("GET", "http://localhost:8080/api/v1/subject/byId?id=" + id , true);
+        xhttp.send();
+    }
+
+    function selectCity( event ) {
+        var id = $(this).attr("id").substr( 11 );
+        //alert("this id '" + $(this).attr("id") + "'    '" + id);
+        //$(this).append( " Cliced ");
+        getSubById( id );
+    }
 
     function loadCity() {
         var xhttp = new XMLHttpRequest();
@@ -40,6 +76,8 @@
 
                 oData.forEach(function (oItem) {
                     var oRow = oTBody.insertRow();
+                    oRow.onclick = selectCity;
+                    oRow.id = "table_data_" + oItem['id'];
                     for (key in oItem) {
                         var oCell = oRow.insertCell();
                         oCell.innerHTML = oItem[key];
