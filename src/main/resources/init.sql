@@ -9,7 +9,7 @@ create table type
     name varchar
 );
 
-alter table type owner to postgres;
+alter table type owner to current_user ;
 
 create unique index type_id_uindex
     on type (id);
@@ -31,7 +31,7 @@ create table subject
 				on update cascade on delete set null
 );
 
-alter table subject owner to postgres;
+alter table subject owner to current_user;
 
 create unique index city_id_uindex
 	on subject (id);
