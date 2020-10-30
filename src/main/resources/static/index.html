@@ -48,7 +48,7 @@
                 document.getElementById('card-parent').appendChild(ul) ;
             }
         };
-        xhttp.open("GET", "http://localhost:8080/api/v1/subject/byId?id=" + id , true);
+        xhttp.open("GET", "/api/v1/subject/byId?id=" + id , true);
         xhttp.send();
     }
 
@@ -85,7 +85,7 @@
                 })
             }
         };
-        xhttp.open("GET", "http://localhost:8080/api/v1/subject/all", true);
+        xhttp.open("GET", "/api/v1/subject/all", true);
         xhttp.send();
     }
 
