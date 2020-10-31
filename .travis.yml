@@ -18,11 +18,9 @@ addons:
          secure: "ZmINsxKdjPkfkca3oKZNNQx8anypUe40rjBSUgOKfPWk17m+4MDQnKy3GbmpMs3vrweyMAzvsnBhw11chpjXGYVA1LSs0Qv7HSGAswzVuO5AcyIUyv1Df1KMSGEz/Uw6S/hgY/uOU5mM9qprbvTRxFjkjIzagn9f3CYCugRtOS3/L7EGC9gA2qUGM1CsICKF0HkPHjoSTOmK7utuKvBelaDDnYTncBLp6v5lMcBze3uplah/70Qr/s4Dp1hIJLtoBUrweWuwtPhCfx6rNTkEsLd0boKNp0a/HpWNMme2q6s4p+N9+i5YmxHhdW/cByQ83WjGGPYNskcWHgLJPVioOmnHoqeBVWn09ui7q2Z5TPTrZrtNHXqOhh7H1Q9B2s6D+10KHcz7WS/DLyWnZjmAH2AaXBtJ86wc6ms+Fg2OkcivXRbE3S3KULBN/ASmZI4bdB2RdT/sVHGs9eljhsSxzK2+TiM4a/a9rM76wggxaZHXfdr/ZgjmNJJYUohvX4MeUlh3MtlWJ/UX/E3CAM6vDmaZgqtFAv94EVZJ+5Ee6BWbjmpRqJtSmXKRdumQjq/eip3EV0an3pUEa7euVLRsMcc652pZzmmb3w7zM5iEgnLO2vtHiOkZJsNFICTj9nHJM7IN4Lf39ic6cylY3RIT/dwTWjkPCzpYSuP8RDUrA4k="
 
 script:
-   - mvn clean verify org.jacoco:jacoco-maven-plugin:prepare-agent package org.jacoco:jacoco-maven-plugin:report -B
-   - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh && . ./install-jdk.sh -F 11 -L GPL
+   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=zipa455_simpleapi
 
 after_success:
-   - sonar-scanner
    - docker login -u $DOCKER_USER -p $DOCKER_PASS
    - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo "$TRAVIS_BRANCH"; fi`
    - export IMAGE_NAME=zipa455-simpleapi/zipa455-simpleapi-docker
