@@ -1,6 +1,28 @@
- dist: trusty
- jdk: oraclejdk8
- language: java
- services:
+dist: trusty
+jdk: oraclejdk8
+language: java
+services:
    - postgresql
    - docker
+env:
+   global:
+      - secure: "Jj9OM79fCyyGeFOjdFDhWsEpu25jP57TGmnvojVtLpxeRLiGmVtWSpKMkThHltBJfC7a7apY8Sma2+KUldIea02q/DSZ9FwNLvv5kZmU7OyIngIOVelvhFcKq3u7BqrN/mRGVBICkMZoCWtxJorMXx8rZ3wkIR/CneWHPcppVvu6PF/LD1ky9QbeEr/P/FvfrOuJJFnmW49tth3HMyCydp4ZBnD3fJLpzqHBGmhS1sIij5u9/kTJbvDV/IX41sUxgLfb5lR1762OMdjZ/l5MLUgmC6GSv0T1slB95DJhLH1dK4VIiv4VBJz4gfEUGT/hJr0hWlzYEfrxa/PwGakwlFMtXpRFmQG3mIx+EiZ5WFHn3r1osa4tXPyqd+AbysOEM6FsM1XK7CT0g4F81xqf2+4nqtUvG861FP4l5DlHQgM9jiXyXPSly2gifd5AH0C7RLLCaseavDLeoKsb/T5FoXL0HLny+NW7WNbVFFZPZX6bdAg20lsfAE3dMXmF+DF/i88HYncWrOcFW5NANH3sLSvvtM9w701+3k1micaVVO4Z5KTej1xBdrWqVWijMPoOG7RZBv9ve55AP612DYKYi91B44cfm13hur72mZ83Qb+kXD9VqN3ABr5XLATkL77v1ufSDhZYWi/sIf0rqd+0dGfhID78BiuFyPPb1WM2LL0="
+      - secure: "uAndqQSqr3RtUEe0eYGj9qv6dTN8hoq5qRBhJS+zzRAaU6/cZVrlOlmSIkpf6JyNpWMB28l39/qlTwY2Ft4Bfc7FzwJ3IHJkFD0w9LJbIj2T2jeS1gkvUJYNcRNytLKflMbPu6O49wXf3XAaYfZ7K+DqAa6X/rvcTShbqZhdUv5WUjSlaraoAjxGdQHayTnwNCuceFzBfPbsTnSQwSJoiquDSJDOfc1TWOuh988GT2DoD16qg5KkWJpUPYDiUyLdzUj4pmqaq9Ay82S+i7rWofOeZnllljVP0VGhQQ6NTm/S+AokMsZyawhm6Pz4vM0ofDy3tfbLujoGrwYFDqtPD4D1/FTyVJ41m7A4TatizTsWsRa8kAXsp498xeO5jhgsiv6HKkfFbZYavtv7x9ut8/EDKfdpA5fF7ylVXTRT+PRYS3cSEDvlZhWmri0opyk6jD7GCl4OLqO6Mp96rcS3Yc0EN5VxfzFclMwb+TyUin4SAHTmWruNAt2lZux90SsJnGXXJA6+3vJN2B+vpxKztDPW7R7wrfDaXZfKoDvJdc2cFvMyx9mhF+LS3Kkz/Di9q10D/4LiDywrojz0oWnRhfO56bRzJrdN5HJqqMidDkPwjUMAwZ/diFLWuwS7/MjW3asLi/qCCjSmUX0Bykdck24Jzq4QKfNXgccBySaz7X0="
+      - secure: "ZtmvSwmw9eJFPjTLSmT+7UHtm6fklJzzjgt81+FbuyuqdQQ8RiM852+HAoNdHI17pnrSy3sT0JGvRK8FGoW50j7KLlirDzDHyrFPskRWCNqIrNSRky5VY6HmwNSkKcbtE+nUbJgJAcje220GQHN2pS8GXaMUUyFHQlj0Cu0A52XA8VMxfuXCQ88LBnMo3KxKb7KeBOx4vWc+kScO1A2UjMikHSNsH/C70q3NBdFNNSQH1GB9HuCl1S9DHqff1EeFi521U9atdjBnDNPNnqtMRzUTG6QbKwuEWH1xpuSYFRmJ0bPHzdKo/mIg9Fq8409fpJTWqU5uzce8VkGezbv3bc82N0JanovF5/LH2gH0PWkRR7Bct8Jer99g/S3WuIzxQXB8yBfMJb55DKl8NHtuYIlrBKE3ljEoZeWLhgRxHMm2HKUM7Ymo9gn1RSlOBNeUA9T6dC/usnU9I2errjsuCciqlp5M3zrb/pBtCzvHcsCtM3bLM+gP9tFybuwiW4Fp6KxbrJGtBAHC4K4GnAr3YZksLhZA2zqFaPNgwbySFkzwg/Gi3xMZ+BJxNnmkBwRsALO0tJt45Mw9qBnw/aziUy7m52lDsMIs+NRMTMeLdoHbg/TKtgd3QEKaXy9vnPLdJsr+/VGlWnuOCafdYz40MF/u2cil16wtmbWK5bk/nt8="
+      - COMMIT=${TRAVIS_COMMIT::7}
+
+script:
+   - ./mvnw clean install -B
+
+after_success:
+   - docker login -u $DOCKER_USER -p $DOCKER_PASS
+   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo "$TRAVIS_BRANCH"; fi`
+   - export IMAGE_NAME=zipa455-simpleapi/zipa455-simpleapi-docker
+   - docker build -t $IMAGE_NAME:latest .
+   - docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG
+   - docker push $IMAGE_NAME:$TAG
+
+deploy:
+   provider: heroku
+   api_key: $HEROKU_API_KEY
+   app: zipa455-simpleapi

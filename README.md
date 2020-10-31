@@ -1,3 +1,5 @@
+![](https://travis-ci.com/zipa455/simpleapi.svg?branch=master)
+
 # Технологии разработки программного обеспечения
 * Лабораторная работа №1: создание микросервиса на Spring Boot с базой данных
 * Шакиров А.А. - МБД2031
@@ -67,3 +69,5 @@ docker exec -u postgres postgres-docker psql postgres postgres -f docker-entrypo
 
 * (GET)		localhost:8080/api/v1/status
 
+##Лабораторная работа №3: CI/CD и деплой приложения в Heroku
+Целью лабораторной работы является знакомство с CI/CD и его реализацией на примере Travis CI и Heroku.
