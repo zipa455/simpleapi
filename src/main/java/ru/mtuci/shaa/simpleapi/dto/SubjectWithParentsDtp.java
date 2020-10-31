@@ -5,9 +5,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class SubjectWithPaentsDto {
+public class SubjectWithParentsDtp {
     private Long id;
-    private String Name;
+    private String name;
     private Integer populating;
     private List<String> parentNames;
     private Long type;

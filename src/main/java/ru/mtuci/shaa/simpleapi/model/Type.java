@@ -7,15 +7,14 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 @Entity
 @Table(name = "type" )
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class Type extends AbstractBaseEntity{
 
     @Column

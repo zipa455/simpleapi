@@ -6,5 +6,4 @@ import ru.mtuci.shaa.simpleapi.model.Subject;
 
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
 
-    //Subject findByName( Long id );
 }

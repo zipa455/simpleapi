@@ -5,7 +5,6 @@ import lombok.Data;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Objects;
 
 @Data
 @AllArgsConstructor

@@ -3,7 +3,7 @@ package ru.mtuci.shaa.simpleapi.service;
 import lombok.AllArgsConstructor;
 import ru.mtuci.shaa.simpleapi.dao.SubjectRepository;
 import ru.mtuci.shaa.simpleapi.dto.SubjectDto;
-import ru.mtuci.shaa.simpleapi.dto.SubjectWithPaentsDto;
+import ru.mtuci.shaa.simpleapi.dto.SubjectWithParentsDtp;
 import ru.mtuci.shaa.simpleapi.model.Subject;
 
 import javax.xml.bind.ValidationException;
@@ -43,7 +43,7 @@ public class DefaultSubjectService  {
     }
 
 
-    public SubjectWithPaentsDto findById(Long id) {
+    public SubjectWithParentsDtp findById(Long id) {
         Optional<Subject> subject = subjectRepository.findById( id );
         return subject.map(subjectConverter::fromSubjectToSubjectWithParentsDto).orElse(null);
     }

@@ -5,12 +5,10 @@ import org.springframework.stereotype.Component;
 import ru.mtuci.shaa.simpleapi.dao.SubjectRepository;
 import ru.mtuci.shaa.simpleapi.dao.TypeRepository;
 import ru.mtuci.shaa.simpleapi.dto.SubjectDto;
-import ru.mtuci.shaa.simpleapi.dto.SubjectWithPaentsDto;
+import ru.mtuci.shaa.simpleapi.dto.SubjectWithParentsDtp;
 import ru.mtuci.shaa.simpleapi.model.Subject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @AllArgsConstructor
@@ -31,20 +29,20 @@ public class SubjectConverter {
     public SubjectDto fromSubjectToSubjectDto( Subject subject ) {
         return SubjectDto.builder()
                 .id( subject.getId() )
-                .Name( subject.getName() )
+                .name( subject.getName() )
                 .populating( subject.getPopulating() )
                 .parent( subject.getParentId() )
                 .type( subject.getType() )
                 .build();
     }
 
-    public SubjectWithPaentsDto fromSubjectToSubjectWithParentsDto( Subject subject ) {
-        SubjectWithPaentsDto sbj = new SubjectWithPaentsDto();
+    public SubjectWithParentsDtp fromSubjectToSubjectWithParentsDto(Subject subject ) {
+        SubjectWithParentsDtp sbj = new SubjectWithParentsDtp();
         sbj.setId( subject.getId() );
         sbj.setName( subject.getName() );
         sbj.setType( subject.getType() );
         sbj.setPopulating( subject.getPopulating() );
-        ArrayList<String> names = new ArrayList<String>();
+        ArrayList<String> names = new ArrayList<>();
         Subject parent = subject.getParent();
         while (parent!=null) {
             names.add( parent.getName() );

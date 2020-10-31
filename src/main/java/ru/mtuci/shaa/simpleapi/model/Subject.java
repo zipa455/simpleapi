@@ -1,18 +1,15 @@
 package ru.mtuci.shaa.simpleapi.model;
 
 import lombok.*;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.SafeHtml;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 @Entity
 @Table(name = "subject" )
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class Subject extends AbstractBaseEntity{
 
     @Column
@@ -33,8 +30,6 @@ public class Subject extends AbstractBaseEntity{
         }
     }
 
-    //@ManyToOne
-    //@JoinColumn( name="type", referencedColumnName = "id" )
-    //private Type type;
+    @Column
     private Long type;
 }
