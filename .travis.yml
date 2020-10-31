@@ -19,7 +19,7 @@ addons:
          secure: $SONAR_TOKEN
 
 script:
-   - ./mvnw clean verify sonar:sonar -Pcoverage -Dsonar.projectKey=myorg_myrepo
+   - ./mvnw clean verify sonar:sonar -Pcoverage -Dsonar.projectKey=simpleapi
 
 after_success:
    - docker login -u $DOCKER_USER -p $DOCKER_PASS
