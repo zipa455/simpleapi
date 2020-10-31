@@ -1,8 +1,6 @@
 package ru.mtuci.shaa.simpleapi.service;
 
-import jdk.jfr.internal.tool.PrettyWriter;
 import lombok.AllArgsConstructor;
-import org.springframework.data.jpa.repository.JpaRepository;
 import ru.mtuci.shaa.simpleapi.dao.SubjectRepository;
 import ru.mtuci.shaa.simpleapi.dto.SubjectDto;
 import ru.mtuci.shaa.simpleapi.dto.SubjectWithPaentsDto;
