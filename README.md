@@ -5,8 +5,8 @@
 
 ## Клонирование исходного кода в Git
 
-* cd \<project dir\>
-* git clone https://github.com/zipa455/simpleapi .
+* ```cd \<project dir\>```
+* ```git clone https://github.com/zipa455/simpleapi .```
 
 ## Сборка приложения в Maven
 
@@ -14,7 +14,7 @@
 
 * ```mvn clean install``` или ```mvnw clean install```, если у вас Windows
 
-Перед этим у вас должна быть запущена и инициализирована база данных
+Перед этим можно запустить и инициализировать базу данных
 Запустить базу данных можно так:
  ```
  docker run --name postgres-docker -e POSTGRES_PASSWORD=root -p 5432:5432 postgres
@@ -63,4 +63,7 @@ docker exec -u postgres postgres-docker psql postgres postgres -f docker-entrypo
 * (POST)	localhost:8080/api/v1/subject/add
 * (DELETE)	localhost:8080/api/v1/subject/del
 
+и
+
+* (GET)		localhost:8080/api/v1/status
 
