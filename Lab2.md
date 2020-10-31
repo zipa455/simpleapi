@@ -167,9 +167,9 @@ data:
 
 
 Вывод команды ```kubectl get po```
-![kubectl get po](screens/kube1.png)
+![kubectl get po](https://github.com/zipa455/simpleapi/blob/main/screens/Kube1.PNG)
 
 Обзор подов
-![Обзор подов](screens/kube2.png)
+![Обзор подов](https://github.com/zipa455/simpleapi/blob/main/screens/Kube2.PNG)
 
 Видеообзор работы кластера: [тыц]: https://drive.google.com/file/d/1HcU1IbQBYC5eQSOKDxyRh8SarGJkdzWr/view?usp=sharing
