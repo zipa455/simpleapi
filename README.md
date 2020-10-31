@@ -71,3 +71,5 @@ docker exec -u postgres postgres-docker psql postgres postgres -f docker-entrypo
 
 ##Лабораторная работа №3: CI/CD и деплой приложения в Heroku
 Целью лабораторной работы является знакомство с CI/CD и его реализацией на примере Travis CI и Heroku.
+
+![Приложение размещено здесь]:https://zipa455-simpleapi.herokuapp.com/
