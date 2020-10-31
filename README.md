@@ -62,3 +62,5 @@ docker exec -u postgres postgres-docker psql postgres postgres -f docker-entrypo
 * (GET)		localhost:8080/api/v1/subject/all
 * (POST)	localhost:8080/api/v1/subject/add
 * (DELETE)	localhost:8080/api/v1/subject/del
+
+
