@@ -19,7 +19,7 @@ class SimpleapiApplicationTests {
     SubjectController  subjectController;
 
     @Test
-    void mainTest() {
+    void contextLoads() {
         assertThat(statusController).isNotNull();
         assertThat(subjectController).isNotNull();
     }
