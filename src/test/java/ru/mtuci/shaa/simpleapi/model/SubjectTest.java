@@ -13,9 +13,9 @@ class SubjectTest {
         Subject subject = new Subject();
         Subject parent = new Subject();
         subject.setParent( parent );
-        parent.setId( 1L );
+        parent.setId( 2L );
 
-        assertEquals( 1L, subject.getParentId() );
+        assertEquals( 2L, subject.getParentId() );
     }
 
     @Test
