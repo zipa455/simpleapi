@@ -23,7 +23,7 @@ script:
 after_success:
    - docker login -u $DOCKER_USER -p $DOCKER_PASS
    - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo "$TRAVIS_BRANCH"; fi`
-   - export IMAGE_NAME=zipa455-simpleapi/zipa455-simpleapi-docker
+   - export IMAGE_NAME=zipa455/zipa455-simpleapi
    - docker build -t $IMAGE_NAME:latest .
    - docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG
    - docker push $IMAGE_NAME:$TAG
