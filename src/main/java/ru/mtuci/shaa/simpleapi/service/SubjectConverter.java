@@ -1,14 +1,16 @@
 package ru.mtuci.shaa.simpleapi.service;
 
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Component;
 import ru.mtuci.shaa.simpleapi.dao.SubjectRepository;
 import ru.mtuci.shaa.simpleapi.dao.TypeRepository;
 import ru.mtuci.shaa.simpleapi.dto.SubjectDto;
 import ru.mtuci.shaa.simpleapi.dto.SubjectWithParentsDtp;
 import ru.mtuci.shaa.simpleapi.model.Subject;
+import ru.mtuci.shaa.simpleapi.model.Type;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Component
 @AllArgsConstructor
@@ -22,7 +24,7 @@ public class SubjectConverter {
         subject.setName( subjectDto.getName() );
         subject.setPopulating( subjectDto.getPopulating() );
         subject.setParent( subjectRepository.findById( subjectDto.getParent() ).orElse( null) );
-        subject.setType( subjectDto.getType() );
+        subject.setType( typeRepository.findByName( subjectDto.getType() ).orElse( null ) );
         return subject;
     }
 
@@ -32,7 +34,7 @@ public class SubjectConverter {
                 .name( subject.getName() )
                 .populating( subject.getPopulating() )
                 .parent( subject.getParentId() )
-                .type( subject.getType() )
+                .type( subject.getType() == null ? null : subject.getType().getName() )
                 .build();
     }
 
@@ -40,7 +42,12 @@ public class SubjectConverter {
         SubjectWithParentsDtp sbj = new SubjectWithParentsDtp();
         sbj.setId( subject.getId() );
         sbj.setName( subject.getName() );
-        sbj.setType( subject.getType() );
+        if( subject.getType() != null ) {
+            sbj.setType( subject.getType().getName() );
+        } else  {
+            sbj.setType( null );
+        }
+
         sbj.setPopulating( subject.getPopulating() );
         ArrayList<String> names = new ArrayList<>();
         Subject parent = subject.getParent();

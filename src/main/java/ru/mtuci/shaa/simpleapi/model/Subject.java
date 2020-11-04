@@ -30,6 +30,6 @@ public class Subject extends AbstractBaseEntity{
         }
     }
 
-    @Column
-    private Long type;
+    @ManyToOne( targetEntity = Type.class )
+    private Type type;
 }

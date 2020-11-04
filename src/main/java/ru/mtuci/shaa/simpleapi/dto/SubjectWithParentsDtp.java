@@ -10,5 +10,5 @@ public class SubjectWithParentsDtp {
     private String name;
     private Integer populating;
     private List<String> parentNames;
-    private Long type;
+    private String type;
 }

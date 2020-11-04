@@ -11,6 +11,6 @@ public class SubjectDto {
     private String name;
     private Integer populating;
     private Long parent;
-    private Long type;
+    private String type;
 }
 
