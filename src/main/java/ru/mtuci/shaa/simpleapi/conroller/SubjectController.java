@@ -6,7 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.mtuci.shaa.simpleapi.dto.SubjectDto;
-import ru.mtuci.shaa.simpleapi.dto.SubjectWithParentsDtp;
+import ru.mtuci.shaa.simpleapi.dto.SubjectWithParentsDto;
 import ru.mtuci.shaa.simpleapi.service.DefaultSubjectService;
 
 import javax.xml.bind.ValidationException;
@@ -20,13 +20,13 @@ public class SubjectController {
     private final DefaultSubjectService defaultSubjectService;
 
     @GetMapping( "/byId")
-    public SubjectWithParentsDtp get(@RequestParam Long id)  {
+    public SubjectWithParentsDto getAll(@RequestParam Long id)  {
         log.info( "get Subject by ID: " + id );
         return this.defaultSubjectService.findById( id );
     }
 
     @GetMapping("/all")
-    public List<SubjectDto> get()  {
+    public List<SubjectDto> getAll()  {
         log.info( "get Subject ALLL" );
         return this.defaultSubjectService.findAll();
     }

@@ -1,11 +1,15 @@
 package ru.mtuci.shaa.simpleapi.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
-public class SubjectWithParentsDtp {
+@AllArgsConstructor
+@NoArgsConstructor
+public class SubjectWithParentsDto {
     private Long id;
     private String name;
     private Integer populating;

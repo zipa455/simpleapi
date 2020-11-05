@@ -5,12 +5,10 @@ import org.springframework.stereotype.Component;
 import ru.mtuci.shaa.simpleapi.dao.SubjectRepository;
 import ru.mtuci.shaa.simpleapi.dao.TypeRepository;
 import ru.mtuci.shaa.simpleapi.dto.SubjectDto;
-import ru.mtuci.shaa.simpleapi.dto.SubjectWithParentsDtp;
+import ru.mtuci.shaa.simpleapi.dto.SubjectWithParentsDto;
 import ru.mtuci.shaa.simpleapi.model.Subject;
-import ru.mtuci.shaa.simpleapi.model.Type;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Component
 @AllArgsConstructor
@@ -38,8 +36,8 @@ public class SubjectConverter {
                 .build();
     }
 
-    public SubjectWithParentsDtp fromSubjectToSubjectWithParentsDto(Subject subject ) {
-        SubjectWithParentsDtp sbj = new SubjectWithParentsDtp();
+    public SubjectWithParentsDto fromSubjectToSubjectWithParentsDto(Subject subject ) {
+        SubjectWithParentsDto sbj = new SubjectWithParentsDto();
         sbj.setId( subject.getId() );
         sbj.setName( subject.getName() );
         if( subject.getType() != null ) {
