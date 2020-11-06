@@ -14,9 +14,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import ru.mtuci.shaa.simpleapi.dao.TypeRepository;
 import ru.mtuci.shaa.simpleapi.dto.SubjectDto;
 import ru.mtuci.shaa.simpleapi.dto.SubjectWithParentsDto;
 import ru.mtuci.shaa.simpleapi.model.Subject;
+import ru.mtuci.shaa.simpleapi.model.Type;
 import ru.mtuci.shaa.simpleapi.service.DefaultSubjectService;
 
 import javax.xml.bind.ValidationException;
@@ -46,6 +48,9 @@ class SubjectControllerTest {
 
     @MockBean
     private DefaultSubjectService subjectService;
+
+    @MockBean
+    private TypeRepository typeRepository;
 
 
     @Test
@@ -89,6 +94,22 @@ class SubjectControllerTest {
                         .contentType(MediaType.APPLICATION_JSON).content(ow.writeValueAsString(subject)))
                 .andExpect( status().isOk());
         verify( subjectService, VerificationModeFactory.times(1)).save(Mockito.any());
+        reset(subjectService);
+    }
+
+    @Test
+    void setTypeSubject() throws Exception {
+        SubjectWithParentsDto subjectParent = new SubjectWithParentsDto(1L,"Parent", 111, null, null  );
+        given( subjectService.findById( 1L )).willReturn( subjectParent );
+        given( typeRepository.findByName("NameType " )).willReturn(java.util.Optional.of(new Type("NameType")));
+
+        SubjectDto subject = new SubjectDto(2L,"Name", 111, 333L, ""  );
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        mvc.perform(
+                post("/api/v1/subject/setType/1")
+                        .contentType(MediaType.APPLICATION_JSON).content("NameType"))
+                .andExpect( status().isOk());
+        verify( subjectService, VerificationModeFactory.times(1)).setType(1L, "NameType");
         reset(subjectService);
     }
 
