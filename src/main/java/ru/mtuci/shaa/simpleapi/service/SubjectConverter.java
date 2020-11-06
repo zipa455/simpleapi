@@ -9,6 +9,9 @@ import ru.mtuci.shaa.simpleapi.dto.SubjectWithParentsDto;
 import ru.mtuci.shaa.simpleapi.model.Subject;
 
 import java.util.ArrayList;
+import java.util.Optional;
+
+import static java.util.Objects.isNull;
 
 @Component
 @AllArgsConstructor
@@ -21,8 +24,13 @@ public class SubjectConverter {
         subject.setId( subjectDto.getId() );
         subject.setName( subjectDto.getName() );
         subject.setPopulating( subjectDto.getPopulating() );
-        subject.setParent( subjectRepository.findById( subjectDto.getParent() ).orElse( null) );
-        subject.setType( typeRepository.findByName( subjectDto.getType() ).orElse( null ) );
+        if( subjectDto.getParent() != null ) {
+            Optional<Subject> parent =  subjectRepository.findById( subjectDto.getParent() );
+            subject.setParent( parent.orElse(null) );
+        }
+        if( subjectDto.getType() != null && !subjectDto.getType().isEmpty() ) {
+            subject.setType( typeRepository.findByName( subjectDto.getType() ).orElse( null ) );
+        }
         return subject;
     }
 
@@ -42,8 +50,6 @@ public class SubjectConverter {
         sbj.setName( subject.getName() );
         if( subject.getType() != null ) {
             sbj.setType( subject.getType().getName() );
-        } else  {
-            sbj.setType( null );
         }
 
         sbj.setPopulating( subject.getPopulating() );
