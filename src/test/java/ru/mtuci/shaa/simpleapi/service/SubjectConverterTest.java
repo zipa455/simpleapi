@@ -52,8 +52,13 @@ class SubjectConverterTest {
         System.out.println(subjectRepository.findById( 1L ));
         System.out.println(subjectRepository.findById( 1L ));
         Subject  subject = converter.fromSubjectDtoToSubject( subjectDto );
+        Subject  subject1 = converter.fromSubjectDtoToSubject( new SubjectDto( null, "name", 111, null, "" ) );
+        Subject  subject2 = converter.fromSubjectDtoToSubject( new SubjectDto( null, "name", 111, null, null ) );
 
-
+        assertNotNull( subject1  );
+        assertNotNull( subject2  );
+        assertNull( subject1.getParent() );
+        assertNull( subject2.getType() );
         assertNotNull( subject  );
         assertEquals( subjectDto.getName(), subject.getName()  );
         assertEquals( subjectDto.getPopulating(), subject.getPopulating()  );
@@ -73,6 +78,7 @@ class SubjectConverterTest {
 
         Subject subject = new Subject(  "name", 222, parent1, type1 );
         SubjectDto subjectDto = converter.fromSubjectToSubjectDto( subject );
+        SubjectDto subjectDto1 = converter.fromSubjectToSubjectDto( new Subject(  "name", 222, parent1, null ) );
 
         assertNotNull( subjectDto  );
         assertEquals( "name" , subjectDto.getName() );
@@ -95,6 +101,7 @@ class SubjectConverterTest {
         given( typeRepository.findByName("Type1" )).willReturn( Optional.of( type1 ) );
 
         SubjectWithParentsDto subject = converter.fromSubjectToSubjectWithParentsDto( new Subject(  "name", 222, parent2, type1 ) );
+        SubjectWithParentsDto subject1 = converter.fromSubjectToSubjectWithParentsDto( new Subject(  "name", 222, parent2, null ) );
 
         assertNotNull( subject  );
         assertEquals( "name", subject.getName()  );

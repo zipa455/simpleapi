@@ -66,7 +66,12 @@ docker exec -u postgres postgres-docker psql postgres postgres -f docker-entrypo
 * (GET)		localhost:8080/api/v1/subject/ById
 * (GET)		localhost:8080/api/v1/subject/all
 * (POST)	localhost:8080/api/v1/subject/add
+* (POST)	localhost:8080/api/v1/subject/setType/{id}
 * (DELETE)	localhost:8080/api/v1/subject/del
+* (GET)		localhost:8080/api/v1/type/ById
+* (GET)		localhost:8080/api/v1/type/all
+* (POST)	localhost:8080/api/v1/type/add
+* (DELETE)	localhost:8080/api/v1/type/del
 
 и
 
@@ -75,4 +80,8 @@ docker exec -u postgres postgres-docker psql postgres postgres -f docker-entrypo
 ##Лабораторная работа №3: CI/CD и деплой приложения в Heroku
 Целью лабораторной работы является знакомство с CI/CD и его реализацией на примере Travis CI и Heroku.
 
-![Приложение размещено здесь]:https://zipa455-simpleapi.herokuapp.com/
+[Приложение размещено здесь](https://zipa455-simpleapi.herokuapp.com/)
+
+[subject all](https://zipa455-simpleapi.herokuapp.com/api/v1/subject/all)
+
+[type all](https://zipa455-simpleapi.herokuapp.com/api/v1/type/all)
