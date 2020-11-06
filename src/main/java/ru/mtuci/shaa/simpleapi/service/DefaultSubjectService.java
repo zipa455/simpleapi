@@ -7,6 +7,7 @@ import ru.mtuci.shaa.simpleapi.dao.TypeRepository;
 import ru.mtuci.shaa.simpleapi.dto.SubjectDto;
 import ru.mtuci.shaa.simpleapi.dto.SubjectWithParentsDto;
 import ru.mtuci.shaa.simpleapi.model.Subject;
+import ru.mtuci.shaa.simpleapi.model.Type;
 
 import javax.xml.bind.ValidationException;
 
@@ -74,6 +75,21 @@ public class DefaultSubjectService  {
 
     public void deleteSubject(Long id ) {
         subjectRepository.deleteById( id );
+    }
+
+    public SubjectDto setType( Long id, String typeId ) throws ValidationException  {
+        Optional<Subject> subject = subjectRepository.findById( id );
+        if( subject.isEmpty() ) {
+            throw new ValidationException( "Subject not found" );
+        }
+
+        Optional<Type> type = typeRepository.findByName( typeId );
+        if( type.isEmpty() ) {
+            throw new ValidationException( "Type not found " );
+        }
+
+        subject.get().setType( type.get() );
+        return subjectConverter.fromSubjectToSubjectDto( subject.get() );
     }
 
 

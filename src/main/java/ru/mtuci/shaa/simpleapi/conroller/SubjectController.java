@@ -37,6 +37,12 @@ public class SubjectController {
         return this.defaultSubjectService.save( subject );
     }
 
+    @PostMapping("/setType/{id}")
+    public SubjectDto saveNewSubject(@PathVariable Long id, @RequestBody String typeId ) throws ValidationException {
+        log.info( "post Subject type: " + id + " type: " + typeId );
+        return this.defaultSubjectService.setType( id, typeId );
+    }
+
     @DeleteMapping("/del/{id}")
     public ResponseEntity<Void> deleteSubject(@PathVariable Long id) {
         log.info( "delete subject by id: " + id );
