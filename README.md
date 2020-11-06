@@ -85,3 +85,5 @@ docker exec -u postgres postgres-docker psql postgres postgres -f docker-entrypo
 [subject all](https://zipa455-simpleapi.herokuapp.com/api/v1/subject/all)
 
 [type all](https://zipa455-simpleapi.herokuapp.com/api/v1/type/all)
+
+[Status](https://zipa455-simpleapi.herokuapp.com/api/v1/status)
